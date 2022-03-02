@@ -1,3 +1,6 @@
+//Wilson Chan
+//changeDue1
+
 #include <string>
 #include <iostream>
 

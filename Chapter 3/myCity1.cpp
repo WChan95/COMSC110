@@ -1,3 +1,6 @@
+//Wilson Chan
+//myCity1
+
 #include <string>
 #include <iostream>
 

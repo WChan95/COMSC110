@@ -1,3 +1,6 @@
+//Wilson Chan
+//myProfile
+
 #include <string> 
 #include <iostream>
 using namespace std; 
