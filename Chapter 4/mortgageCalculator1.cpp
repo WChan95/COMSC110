@@ -1,6 +1,10 @@
+//Wilson Chan
+//Programming Exercise 4.1
+
 #include <string>
 #include <cmath>
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main()
@@ -24,8 +28,9 @@ int main()
          << "$" << amount_borrowed << endl;
     cout << "Annual inerest rate (programmer input) = " << interest_rate << "%" << endl;
     cout << "Payback period (programmer input) = " << payback_period << " Years" << endl;
+
     cout << "Monthly payment (calcualted output) = "
-         << "$" << monthly_payment << endl;
+         << "$" << std::setprecision(6) << monthly_payment << endl;
 }
 
 // Amount borrowed (programmer input) = $270000
