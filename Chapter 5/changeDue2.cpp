@@ -13,8 +13,22 @@ int main()
     int cashPayment;
     int amountTendered;
 
-    cout << "Cash payment amount: ";
-    cin >> cashPayment;
+    while (true)
+    {
+        cout << "Cash payment amount: ";
+        cin >> cashPayment;
+        if (cashPayment < 0)
+        {
+            cin.fail();
+            cin.clear();
+            cin.ignore();
+            cout << "Error, cash payment must not be zero or negative." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
 
     while (true)
     {
