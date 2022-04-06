@@ -1,5 +1,5 @@
 // Wilson Chan
-// Temperature Conversion v.1.0
+//Programming Exercise 5.4 -  Temperature Conversion v.1.0
 
 #include <string>
 #include <cmath>
