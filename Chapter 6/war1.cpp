@@ -11,6 +11,8 @@ using namespace std;
 string getFace(int val)
 {
 
+    // Values: 2 - 10 = value, 11 = Jack, 12 = Queen, 13 = King, 14 = Ace
+
     if (val == 11)
     {
         return "Jack";
@@ -35,6 +37,7 @@ string getFace(int val)
 }
 string getSuit(int suit)
 {
+    // Suits: 0 = Spades, 1 = Diamonds, 2 = Hearts, 3 = Clubs
     if (suit == 0)
     {
         return "Spades";
@@ -79,8 +82,7 @@ void determineWinner(int humanVal, int computerVal)
 }
 int main()
 {
-    // Values: 2 - 10 = value, 11 = Jack, 12 = Queen, 13 = King, 14 = Ace
-    // Suits: 0 = Spades, 1 = Diamonds, 2 = Hearts, 3 = Clubs
+
     // Victory determined by value suit, have no factor on game conditions
     srand(time(NULL)); // init time seed
     int computerVal = rand() % 14 + 2;
