@@ -9,8 +9,8 @@ using namespace std;
 
 int main()
 {
-    //init random seed
-    srand(time(NULL));
+    
+    srand(time(NULL));//init random seed
     int coinTossed = rand() & 1; // generates 1 or 0
     if(coinTossed == 1){
         cout << "Heads";
