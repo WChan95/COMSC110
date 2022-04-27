@@ -1,5 +1,5 @@
 // Wilson Chan
-// Programming Exercise 7.6
+// Programming Exercise 7.7
 
 #include <iostream>
 #include <string>
@@ -92,16 +92,38 @@ int main()
         int computerSuit = rand() % 3;
         int humanVal = rand() % 14 + 2;
         int humanSuit = rand() % 3;
+        string keepPlaying;
+
         cout << cardOutput("Computer", computerVal, computerSuit) << endl;
         cout << cardOutput("Human", humanVal, humanSuit) << endl;
         string whoWon = determineWinner(humanVal, computerVal);
-        if(whoWon == "It's a tie."){
-            //Will continue playing if tie
-            continue;
-        }else{
-            cout << whoWon << endl;
-            //If either human or computer wins, ends game
+        cout << "--<< " << whoWon << " >>--" << endl;
+
+        while (true)
+        {
+            cout << "Continue? [Y/N] ";
+            cin >> keepPlaying;
+            if (keepPlaying == "y" || keepPlaying == "Y")
+            {
+                break;
+            }
+            else if (keepPlaying == "n" || keepPlaying == "N")
+            {
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+        if (keepPlaying == "n" || keepPlaying == "N")
+        {
             break;
+        }
+        else
+        {
+            continue;
+            ;
         }
     }
 }
