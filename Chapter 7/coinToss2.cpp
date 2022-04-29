@@ -43,6 +43,3 @@ int main()
     printf("Heads: %d\n", heads);
     printf("Tails: %d\n", tails);
 }
-
-// Expect
-// Heads
