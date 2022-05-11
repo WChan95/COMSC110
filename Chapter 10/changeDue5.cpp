@@ -132,8 +132,9 @@ int main()
         getline(fin, line);
         amountTendered = std::stoi(line);
     }
-
+    fin.close();
     changeTendered(amountTendered, cashPayment);
+
 }
 
 /* changeTendered(amountTendered, cashPayment); */
