@@ -110,7 +110,6 @@ int main()
     int amountTendered;
 
     string fileName = "change.txt";
-    int num;
 
     ifstream fin;
 
