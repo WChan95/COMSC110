@@ -1,5 +1,5 @@
 // Wilson Chan
-// Programming Exercise 11.2 - myCity4
+// Programming Exercise 11.3 - myCity4
 
 #include <string>
 #include <iostream>
@@ -10,6 +10,8 @@ int main()
 {
     const int size = 5;
     int temps[size] = {};
+    string days[size] = {"Friday", "Saturday", "Sunday", "Monday", "Tuesday"};
+    int daysNum[size] = {18, 19, 20, 21, 22};
     for (int i = 0; i < size; i++)
     {
         cout << "Please input a temperature: ";
@@ -18,25 +20,11 @@ int main()
 
         temps[i] = askTemperature;
     }
-
-    int fridayHighTemp = temps[0];
-    int satHighTemp = temps[1];
-    int sunHighTemp = temps[2];
-    int monHighTemp = temps[3];
-    int tueHighTemp = temps[4];
-
-    string fridayForecast = "Friday, Feb 18, " + std::to_string(fridayHighTemp) + " degrees";
-    string satForecast = "Saturday, Feb 19, " + std::to_string(satHighTemp) + " degrees";
-    string sunForecast = "Sunday, Feb 20, " + std::to_string(sunHighTemp) + " degrees";
-    string monForecast = "Monday, Feb 21, " + std::to_string(monHighTemp) + " degrees";
-    string tueForecast = "Tuesday, Feb 22," + std::to_string(tueHighTemp) + " degrees";
-
     cout << "Cupertino, California forecast high temperatures" << endl;
-    cout << fridayForecast << endl;
-    cout << satForecast << endl;
-    cout << sunForecast << endl;
-    cout << monForecast << endl;
-    cout << tueForecast << endl;
+    for (int i = 0; i < size; i++)
+    {
+        cout << days[i] << ", Feb " << daysNum[i] << ", " << temps[i] << " degrees" << endl;
+    }
     cout << "source: weather.com";
 
     int highest = temps[0];
