@@ -29,13 +29,39 @@ bool isValid(char c)
     return false;
 }
 
+string toUpperString(string text)
+{
+    // converts text to all upper;
+    for (int i = 0; i < text.length(); i++)
+    {
+        text[i] = toupper(text[i]);
+    }
+
+    return text;
+}
+bool compareEmails(string email_1, string email_2)
+{
+    // checks to see if emails are the same
+    // uses the toUpperString function to effectively make the comparison case
+    string email1_upper = toUpperString(email_1);
+    string email2_upper = toUpperString(email_2);
+
+    if (email1_upper.compare(email2_upper) == 0)
+    {
+        return true;
+    }
+    return false;
+}
+
 int main()
 {
     string inputFile;
-    string defaultInputFile = "fileContainingEmails.txt ";
+    string defaultInputFile = "fileContainingEmails.txt";
     string outputFile;
-    string defaultOutputFile = "copyPasteMyEmails.txt ";
+    string defaultOutputFile = "copyPasteMyEmails.txt";
 
+    inputFile = defaultInputFile;
+    outputFile = defaultOutputFile;
     cout << "Enter input file name (Press enter for default): ";
     getline(cin, inputFile);
     if (inputFile == "")
@@ -65,8 +91,6 @@ int main()
     {
         string line;
 
-        string toPrintEmail = "";
-
         getline(fin, line);
         for (int i = 0; i < line.length(); i++)
         {
@@ -77,7 +101,6 @@ int main()
 
             if (line[i] == '@')
             {
-                toPrintEmail = line;
                 int beforeEmail;
                 int afterEmail;
                 bool hasPeriod = false; // check if there is period
@@ -115,6 +138,7 @@ int main()
                     string email = line.substr(beforeEmail, afterEmail - beforeEmail);
                     for (int i = 0; i < emailCount; i++)
                     {
+                        // checks if email is
                         if (email.compare(emails[i]) == 0)
                         {
                             duplicateEmail = true;
@@ -131,6 +155,7 @@ int main()
     }
     fin.close();
 
+    // Will start writing to email file if there are any emails
     if (emailCount > 0)
     {
         ofstream fout;
@@ -148,6 +173,7 @@ int main()
     }
     else
     {
+        // Message it displays when no emails are found.
         cout << "No emails were found in " << inputFile << endl;
     }
 
