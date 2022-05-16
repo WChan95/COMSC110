@@ -19,30 +19,48 @@
 
 using namespace std;
 
-bool isInvalid(char toCheck)
+bool isValid(char c)
 {
-    // Checks if invalid char;
-    char invalidChars[21] = {';', ':', '"', ' ', ',', '/', '{', '}', '[', ']', '=', '(', ')', '$', '!', '#', '%', '^', '&', '*', '?'};
-    for (int k = 0; k < 21; k++)
+    // Returns true if character is a valid email character
+    if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '.' || c == '-' || c == '+')
     {
-        if (toCheck == invalidChars[k])
-        {
-            return true;
-        }
-        return false;
+        return true;
     }
+    return false;
 }
 
 int main()
 {
+    string inputFile;
+    string defaultInputFile = "fileContainingEmails.txt ";
+    string outputFile;
+    string defaultOutputFile = "copyPasteMyEmails.txt ";
 
-    string fileName = "math1.txt";
+    cout << "Enter input file name (Press enter for default): ";
+    getline(cin, inputFile);
+    if (inputFile == "")
+    {
+        inputFile = defaultInputFile;
+    }
+
+    cout << "Enter output file name (Press enter for default): ";
+    getline(cin, outputFile);
+    if (outputFile == "")
+    {
+        outputFile = defaultOutputFile;
+    }
+
     ifstream fin;
-    fin.open(fileName);
+
+    fin.open(inputFile);
     if (!fin.good())
         throw "I/O error";
 
     int emailCount = 0;
+
+    const int total_emails = 100000;
+    string emails[total_emails];
+
     while (fin.good())
     {
         string line;
@@ -52,36 +70,90 @@ int main()
         getline(fin, line);
         for (int i = 0; i < line.length(); i++)
         {
-            // Traverses line until we hit "@"
+            // Traverses line until we hit "@"e
             // Invalid email character = Anything not A-Z, a-z, 0-9, uderscore, dot, hyphen, and a plus
             // From looking at the files, invalid characters involve :, whitespace,
             char check = line[i];
-            int beginEmail_index;
-            int atEmail_index;
+
             if (line[i] == '@')
             {
                 toPrintEmail = line;
-                atEmail_index = i;
-                emailCount++;
-                for (int j = i; j > -1; j--)
+                int beforeEmail;
+                int afterEmail;
+                bool hasPeriod = false; // check if there is period
+
+                for (int j = i - 1; j > -1; j--)
                 {
-                    if (isInvalid(line[j]))
+                    // Checks for invalid character
+                    if (!isValid(line[j]))
                     {
-                        beginEmail_index = j;
+                        beforeEmail = j;
                         break;
                     }
+
+                    beforeEmail = j;
                 }
 
-                
+                for (int k = i + 1; k < line.length(); k++)
+                {
+                    // Checks for invalid charactere
+                    if (!isValid(line[k]))
+                    {
+                        afterEmail = k;
+                        break;
+                    }
+                    if (line[k] == '.')
+                    {
+                        hasPeriod = true;
+                    }
+                    afterEmail = k;
+                }
+
+                if (emailCount < total_emails)
+                {
+                    bool duplicateEmail = false;
+                    string email = line.substr(beforeEmail, afterEmail - beforeEmail);
+                    for (int i = 0; i < emailCount; i++)
+                    {
+                        if (email.compare(emails[i]) == 0)
+                        {
+                            duplicateEmail = true;
+                        }
+                    }
+
+                    if (!duplicateEmail && hasPeriod)
+                    {
+                        emails[emailCount++] = email;
+                    }
+                }
             }
-        }
-        if (toPrintEmail != "")
-        {
-            cout << toPrintEmail << endl;
         }
     }
     fin.close();
-    cout << "Number of emails found: " << emailCount << endl;
 
+    if (emailCount > 0)
+    {
+        ofstream fout;
+
+        fout.open(outputFile);
+
+        if (!fout.good())
+            throw "I/O error";
+
+        for (int i = 0; i < emailCount; i++)
+        {
+            fout << emails[i] + "; ";
+        }
+        fout.close();
+    }
+    else
+    {
+        cout << "No emails were found in " << inputFile << endl;
+    }
+
+    cout << emailCount << " emails were found in " << inputFile << ", contents have been pasted over to " << outputFile << endl;
+    cout << "Emails may be copied and pasted to the to, cc, or bcc fields." << endl;
+    cout << "Tip: It's best practice to CC your boss when emailing your coworkers to passive aggressively remind them of deadlines." << endl;
+    cout << "Another tip: BCC is also best practice to protect people's privacy so that everyone's email doesn't get shown. Remember if you're trying to stir up drama, use bcc." << endl;
     return 0;
 }
